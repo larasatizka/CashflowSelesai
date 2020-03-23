@@ -7,11 +7,21 @@ public class Account {
     private String name;
     private int balance;
     private List<Transaction> transactions;
+    private String tipe;
 
     public Account(String name) {
         this.name = name;
         this.balance = 0;
         this.transactions = new ArrayList<>();
+        this.tipe="";
+    }
+
+    public String getTipe() {
+        return tipe;
+    }
+
+    public void setTipe(String tipe) {
+        this.tipe = tipe;
     }
 
     public String getName() {
@@ -33,8 +43,10 @@ public class Account {
     public void addTransaction(Transaction transaction) {
         if (transaction.getType() == Transaction.Type.CREDIT) {
             balance += transaction.getAmount();
+            tipe="Credit";
         } else {
             balance -= transaction.getAmount();
+            tipe="Debit";
         }
         this.transactions.add(transaction);
     }
@@ -43,8 +55,10 @@ public class Account {
         Transaction transaction = transactions.get(index);
         if (transaction.getType() == Transaction.Type.CREDIT) {
             balance -= transaction.getAmount();
+            tipe="Credit";
         } else {
             balance += transaction.getAmount();
+            tipe="Debit";
         }
         this.transactions.remove(transaction);
     }
@@ -55,8 +69,10 @@ public class Account {
         for (Transaction t : transactions) {
             if (t.getType() == Transaction.Type.CREDIT) {
                 balance += transaction.getAmount();
+                tipe="Credit";
             } else {
                 balance -= transaction.getAmount();
+                tipe="Debit";
             }
         }
     }
